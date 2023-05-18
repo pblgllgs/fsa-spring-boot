@@ -40,8 +40,8 @@ class CustomerServiceTest {
         int id = 1;
 
         Customer customer = new Customer(
-                id, "Alex","alex@gmail.com",22
-        );
+                id, "Alex","alex@gmail.com",22,
+                Gender.MALE);
         when(customerDao.getCustomerById(id)).thenReturn(Optional.of(customer));
 
         Customer actual = underTest.getCustomer(1);
@@ -98,8 +98,8 @@ class CustomerServiceTest {
         int id = 1;
         when(customerDao.existsPersonWithId(id)).thenReturn(true);
         Customer customer = new Customer(
-                id, "Alex","alex@gmail.com",22
-        );
+                id, "Alex","alex@gmail.com",22,
+                Gender.MALE);
         underTest.deleteCustomer(id);
         verify(customerDao).deleteCustomerById(id);
     }

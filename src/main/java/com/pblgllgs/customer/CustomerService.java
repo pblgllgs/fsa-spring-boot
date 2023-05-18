@@ -37,7 +37,7 @@ public class CustomerService {
                 new Customer(
                         customerRegistrationRequest.name(),
                         customerRegistrationRequest.email(),
-                        customerRegistrationRequest.age()));
+                        customerRegistrationRequest.age(), Gender.MALE));
     }
 
     public void deleteCustomer(Integer customerId) {

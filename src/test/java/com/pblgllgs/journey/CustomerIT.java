@@ -5,6 +5,7 @@ import com.github.javafaker.Name;
 import com.pblgllgs.customer.Customer;
 import com.pblgllgs.customer.CustomerRegistrationRequest;
 import com.pblgllgs.customer.CustomerUpdateRequest;
+import com.pblgllgs.customer.Gender;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -61,8 +62,8 @@ public class CustomerIT {
                 .getResponseBody();
 
         Customer expectedCustomer = new Customer(
-                name, email, age
-        );
+                name, email, age,
+                Gender.MALE);
 
         //Make sure that customer is present
         assertThat(allCustomers).usingRecursiveFieldByFieldElementComparatorIgnoringFields("id")
@@ -223,8 +224,8 @@ public class CustomerIT {
                 .getResponseBody();
 
         Customer expectedCustomer = new Customer(
-          id, newName, email, age
-        );
+          id, newName, email, age,
+                Gender.MALE);
 
         assertThat(updatedCustomer).isEqualTo(expectedCustomer);
     }

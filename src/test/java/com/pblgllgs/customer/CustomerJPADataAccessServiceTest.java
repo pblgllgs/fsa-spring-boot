@@ -51,8 +51,8 @@ class CustomerJPADataAccessServiceTest {
                 1,
                 "pblgllgs",
                 "pblgllgs@gmail.com",
-                20
-        );
+                20,
+                Gender.MALE);
         underTest.insertCustomer(customer);
         verify(customerRepository)
                 .save(customer);
@@ -92,8 +92,8 @@ class CustomerJPADataAccessServiceTest {
                 1,
                 "pblgllgs",
                 "pblgllgs@gmail.com",
-                20
-        );
+                20,
+                Gender.MALE);
         underTest.updateCustomer(customer);
         verify(customerRepository)
                 .save(customer);

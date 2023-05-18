@@ -29,8 +29,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
             FAKER.name().fullName(),
                 FAKER.internet().safeEmailAddress() +"_"+ UUID.randomUUID(),
-                20
-        );
+                20,
+                Gender.MALE);
 
         underTest.insertCustomer(customer);
 
@@ -46,8 +46,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                20
-        );
+                20,
+                Gender.MALE);
 
         underTest.insertCustomer(customer);
 
@@ -82,8 +82,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                20
-        );
+                20,
+                Gender.MALE);
 
         underTest.insertCustomer(customer);
 
@@ -105,8 +105,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 name,
                 email,
-                20
-        );
+                20,
+                Gender.MALE);
 
         underTest.insertCustomer(customer);
 
@@ -132,8 +132,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 name,
                 email,
-                20
-        );
+                20,
+                Gender.MALE);
 
         underTest.insertCustomer(customer);
 
@@ -157,8 +157,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 name,
                 email,
-                20
-        );
+                20,
+                Gender.MALE);
 
         underTest.insertCustomer(customer);
 
@@ -189,8 +189,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 name,
                 email,
-                20
-        );
+                20,
+                Gender.MALE);
 
         underTest.insertCustomer(customer);
 
@@ -225,8 +225,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 name,
                 email,
-                20
-        );
+                20,
+                Gender.MALE);
 
         underTest.insertCustomer(customer);
 
@@ -261,8 +261,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 name,
                 email,
-                20
-        );
+                20,
+                Gender.MALE);
 
         underTest.insertCustomer(customer);
 
@@ -297,8 +297,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 name,
                 email,
-                20
-        );
+                20,
+                Gender.MALE);
 
         underTest.insertCustomer(customer);
 
@@ -322,7 +322,13 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
 
         Optional<Customer> actual = underTest.getCustomerById(id);
 
-        assertThat(actual).isPresent().hasValue(updatedCustomer);
+        assertThat(actual).isPresent().hasValueSatisfying(updated -> {
+            assertThat(updated.getId()).isEqualTo((id));
+            assertThat(updated.getName()).isEqualTo("john");
+            assertThat(updated.getEmail()).isEqualTo(newEmail);
+            assertThat(updated.getAge()).isEqualTo(25);
+            assertThat(updated.getGender()).isEqualTo(Gender.MALE);
+        });
     }
 
     @Test
@@ -332,8 +338,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 name,
                 email,
-                20
-        );
+                20,
+                Gender.MALE);
 
         underTest.insertCustomer(customer);
 

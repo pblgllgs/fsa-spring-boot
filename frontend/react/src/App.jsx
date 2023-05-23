@@ -21,8 +21,7 @@ const App = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, []),
-    [loading];
+  }, []);
 
   if (loading) {
     return (
@@ -39,7 +38,7 @@ const App = () => {
   }
 
   if (customers.length <= 0) {
-    <SidebarWithHeader>
+    return <SidebarWithHeader>
       <Text>No customers available</Text>
     </SidebarWithHeader>;
   }
@@ -50,7 +49,10 @@ const App = () => {
         <Wrap justify={"center"} spacing={"30px"}>
           {customers.map((customer, index) => (
               <WrapItem key={index}>
-                <CardwithImage  {...customer}/>
+                <CardwithImage
+                    {...customer}
+                    imageNumber={index}
+                />
               </WrapItem>
             ))}
         </Wrap>

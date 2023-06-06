@@ -13,7 +13,7 @@ const AddIcon = () => "+";
 const CloseIcon = () => "X";
 
 // eslint-disable-next-line react/prop-types
-const DrawerForm = ({fetchCustomers}) => {
+const CreateCustomerDrawer = ({fetchCustomers}) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
         <>
@@ -29,7 +29,7 @@ const DrawerForm = ({fetchCustomers}) => {
                     <DrawerHeader>Create new customer</DrawerHeader>
 
                     <DrawerBody>
-                        <CreateCustomerForm fetchCustomers={fetchCustomers}/>
+                        <CreateCustomerForm fetchCustomers={fetchCustomers} onClose={onClose}/>
                     </DrawerBody>
 
                     <DrawerFooter>
@@ -46,4 +46,4 @@ const DrawerForm = ({fetchCustomers}) => {
     )
 }
 
-export default DrawerForm;
+export default CreateCustomerDrawer;

@@ -47,7 +47,7 @@ const MySelect = ({ label, ...props }) => {
 
 // And now we can use these
 // eslint-disable-next-line react/prop-types
-const CreateCustomerForm = ({fetchCustomers}) => {
+const CreateCustomerForm = ({fetchCustomers,onClose}) => {
     return (
         <>
             <Formik
@@ -81,7 +81,7 @@ const CreateCustomerForm = ({fetchCustomers}) => {
                     saveCustomer(costumer)
                         .then( res => {
                             console.log(res);
-                            successNotification("Customer saved", "customer added successfully")
+                            successNotification("Customer saved", "Costumer successfully added")
                             fetchCustomers()
                         }).catch( err => {
                             console.log(err);
@@ -91,6 +91,7 @@ const CreateCustomerForm = ({fetchCustomers}) => {
                             )
                         }).finally( () => {
                             setSubmitting(false);
+                            onClose()
                     })
                 }}
             >

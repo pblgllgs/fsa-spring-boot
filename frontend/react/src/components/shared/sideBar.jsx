@@ -107,11 +107,11 @@ const SidebarContent = ({ onClose, ...rest }) => {
 // eslint-disable-next-line react/prop-types
 const NavItem = ({ icon, children, ...rest }) => {
   return (
-    <Link
-      href="#"
-      style={{ textDecoration: "none" }}
-      _focus={{ boxShadow: "none" }}
-    >
+    // <Link
+    //   href="#"
+    //   style={{ textDecoration: "none" }}
+    //   _focus={{ boxShadow: "none" }}
+    // >
       <Flex
         align="center"
         p="4"
@@ -120,7 +120,7 @@ const NavItem = ({ icon, children, ...rest }) => {
         role="group"
         cursor="pointer"
         _hover={{
-          bg: "cyan.400",
+          bg: "red.400",
           color: "white",
         }}
         {...rest}
@@ -137,7 +137,7 @@ const NavItem = ({ icon, children, ...rest }) => {
         )}
         {children}
       </Flex>
-    </Link>
+    // </Link>
   );
 };
 

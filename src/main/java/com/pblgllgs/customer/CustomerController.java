@@ -1,9 +1,11 @@
 package com.pblgllgs.customer;
 
+import com.pblgllgs.jwt.JWTUtil;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/customers")
@@ -11,8 +13,11 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
-    public CustomerController(CustomerService customerService) {
+    private final JWTUtil jwtUtil;
+
+    public CustomerController(CustomerService customerService, JWTUtil jwtUtil) {
         this.customerService = customerService;
+        this.jwtUtil = jwtUtil;
     }
 
 
@@ -27,8 +32,12 @@ public class CustomerController {
     }
 
     @PostMapping
-    public void addCustomer(@RequestBody CustomerRegistrationRequest customerRegistrationRequest){
+    public ResponseEntity<?> addCustomer(@RequestBody CustomerRegistrationRequest customerRegistrationRequest){
         customerService.addCustomer(customerRegistrationRequest);
+        String jwtToken = jwtUtil.issueToken(customerRegistrationRequest.email(), "ROLE_USER");
+        return ResponseEntity.ok()
+                .header(HttpHeaders.AUTHORIZATION, jwtToken)
+                .build();
     }
 
     @DeleteMapping("/{customerId}")

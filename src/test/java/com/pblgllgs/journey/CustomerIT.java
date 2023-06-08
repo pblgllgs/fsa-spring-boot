@@ -62,7 +62,7 @@ public class CustomerIT {
                 .getResponseBody();
 
         Customer expectedCustomer = new Customer(
-                name, email, age,
+                name, email, "password", age,
                 Gender.MALE);
 
         //Make sure that customer is present
@@ -224,7 +224,7 @@ public class CustomerIT {
                 .getResponseBody();
 
         Customer expectedCustomer = new Customer(
-          id, newName, email, age,
+          id, newName, email, "password", age,
                 Gender.MALE);
 
         assertThat(updatedCustomer).isEqualTo(expectedCustomer);

@@ -29,7 +29,7 @@ public class Main {
             Customer customer = new Customer(
                     firstName + " " +lastName,
                     firstName.toLowerCase() + "." + lastName.toLowerCase() + "@gmail.com",
-                    random.nextInt(16,99),
+                    "password", random.nextInt(16,99),
                     Gender.MALE);
             customerRepository.save(customer);
         };

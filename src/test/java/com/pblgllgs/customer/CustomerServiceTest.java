@@ -24,12 +24,14 @@ class CustomerServiceTest {
     @Mock
     private PasswordEncoder passwordEncoder;
 
+    private final CustomerDTOMapper customerDTOMapper =  new CustomerDTOMapper();
+
 
     private CustomerService underTest;
 
     @BeforeEach
     void setUp() {
-        underTest = new CustomerService(customerDao, passwordEncoder);
+        underTest = new CustomerService(customerDao, passwordEncoder, customerDTOMapper);
     }
 
     @Test
@@ -48,9 +50,11 @@ class CustomerServiceTest {
                 Gender.MALE);
         when(customerDao.getCustomerById(id)).thenReturn(Optional.of(customer));
 
-        Customer actual = underTest.getCustomer(1);
+        CustomerDTO actual = underTest.getCustomer(1);
 
-        assertThat(actual).isEqualTo(customer);
+        CustomerDTO expected =  customerDTOMapper.apply(customer);
+
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test

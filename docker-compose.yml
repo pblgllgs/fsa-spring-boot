@@ -26,8 +26,6 @@ services:
     depends_on:
       - db
     restart: unless-stopped
-#    command:
-#      - --spring.datasource.url=jdbc:postgresql://db:5432/customer
 
 networks:
   db:

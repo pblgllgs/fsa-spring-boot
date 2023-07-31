@@ -8,6 +8,7 @@ services:
       PGDATA: /data/postgres
     volumes:
       - db:/data/postgres
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5332:5432"
     networks:
@@ -26,8 +27,6 @@ services:
     depends_on:
       - db
     restart: unless-stopped
-#    command:
-#      - --spring.datasource.url=jdbc:postgresql://db:5432/customer
 
   frontend:
     container_name: frontend-fsa

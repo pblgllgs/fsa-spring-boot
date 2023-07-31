@@ -16,6 +16,7 @@ import java.util.UUID;
 
 @SpringBootApplication
 public class Main {
+    private static final Random RANDOM = new Random();
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
     }
@@ -24,15 +25,16 @@ public class Main {
     CommandLineRunner runner(CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
         return args -> {
             Faker faker = new Faker();
-            Random random = new Random();
             Name name = faker.name();
             String firstName = name.firstName();
             String lastName = name.lastName();
+            int age = RANDOM.nextInt(1, 100);
+            Gender gender = age %2 == 0 ? Gender.MALE : Gender.FEMALE;
             Customer customer = new Customer(
                     firstName + " " +lastName,
                     firstName.toLowerCase() + "." + lastName.toLowerCase() + "@gmail.com",
-                    passwordEncoder.encode(UUID.randomUUID().toString()), random.nextInt(16,99),
-                    Gender.MALE);
+                    passwordEncoder.encode(UUID.randomUUID().toString()), age,
+                    gender);
             customerRepository.save(customer);
         };
     }

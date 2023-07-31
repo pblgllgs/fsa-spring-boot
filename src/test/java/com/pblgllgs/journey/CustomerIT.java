@@ -21,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CustomerIT {
     private static final Random RANDOM = new Random();
+    private static final String CUSTOMER_PATH="/api/v1/customers";
     @Autowired
     private WebTestClient webTestClient;
 
@@ -39,7 +40,7 @@ public class CustomerIT {
 
         //Send a post request
         String jwtToken = webTestClient.post()
-                .uri("/api/v1/customers")
+                .uri(CUSTOMER_PATH)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(request), CustomerRegistrationRequest.class)
@@ -53,7 +54,7 @@ public class CustomerIT {
 
         //Get all customers
         List<CustomerDTO> allCustomers = webTestClient.get()
-                .uri("/api/v1/customers")
+                .uri(CUSTOMER_PATH)
                 .accept(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()
@@ -86,7 +87,7 @@ public class CustomerIT {
 
         //Get customer by id
         webTestClient.get()
-                .uri("/api/v1/customers" + "/{id}", id)
+                .uri(CUSTOMER_PATH + "/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()
@@ -116,7 +117,7 @@ public class CustomerIT {
 
         //create customer for delete
         webTestClient.post()
-                .uri("/api/v1/customers")
+                .uri(CUSTOMER_PATH)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(request), CustomerRegistrationRequest.class)
@@ -126,7 +127,7 @@ public class CustomerIT {
 
         //Send a post request
         String jwtToken = webTestClient.post()
-                .uri("/api/v1/customers")
+                .uri(CUSTOMER_PATH)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(auth), CustomerRegistrationRequest.class)
@@ -140,7 +141,7 @@ public class CustomerIT {
 
         //Get all customers
         List<Customer> allCustomers = webTestClient.get()
-                .uri("/api/v1/customers")
+                .uri(CUSTOMER_PATH)
                 .accept(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()
@@ -160,7 +161,7 @@ public class CustomerIT {
 
         //Delete customer
         webTestClient.delete()
-                .uri("/api/v1/customers" + "/{id}", id)
+                .uri(CUSTOMER_PATH + "/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()
@@ -169,7 +170,7 @@ public class CustomerIT {
 
         //Get customer by id
         webTestClient.get()
-                .uri("/api/v1/customers" + "/{id}", id)
+                .uri(CUSTOMER_PATH + "/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()
@@ -198,7 +199,7 @@ public class CustomerIT {
 
         //create customer
         String jwtToken = webTestClient.post()
-                .uri("/api/v1/customers")
+                .uri(CUSTOMER_PATH)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(auth), CustomerRegistrationRequest.class)
@@ -212,7 +213,7 @@ public class CustomerIT {
 
         //Get all customers
         List<CustomerDTO> allCustomers = webTestClient.get()
-                .uri("/api/v1/customers")
+                .uri(CUSTOMER_PATH)
                 .accept(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()
@@ -238,7 +239,7 @@ public class CustomerIT {
 
         //Update customer
         webTestClient.put()
-                .uri("/api/v1/customers" + "/{id}", id)
+                .uri(CUSTOMER_PATH + "/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .contentType(MediaType.APPLICATION_JSON)
@@ -249,7 +250,7 @@ public class CustomerIT {
 
         //Get customer by id
         CustomerDTO updatedCustomer = webTestClient.get()
-                .uri("/api/v1/customers" + "/{id}", id)
+                .uri(CUSTOMER_PATH + "/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()

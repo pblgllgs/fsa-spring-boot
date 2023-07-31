@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 
@@ -20,12 +21,15 @@ class CustomerServiceTest {
 
     @Mock
     private CustomerDao customerDao;
+    @Mock
+    private PasswordEncoder passwordEncoder;
+
 
     private CustomerService underTest;
 
     @BeforeEach
     void setUp() {
-        underTest = new CustomerService(customerDao);
+        underTest = new CustomerService(customerDao, passwordEncoder);
     }
 
     @Test
@@ -64,8 +68,13 @@ class CustomerServiceTest {
         String email = "alex@gmail.com";
         when(customerDao.existsPersonWithEmail(email)).thenReturn(false);
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                "alex",email, 22
-        );
+                "alex",email, "password", 22,
+                Gender.MALE);
+
+        String passwordHash = "!alksjdjkahsdkjhaksd";
+
+        when(passwordEncoder.encode(request.password())).thenReturn(passwordHash);
+
         underTest.addCustomer(request);
 
         ArgumentCaptor<Customer> customerArgumentCaptor = ArgumentCaptor.forClass(Customer.class);
@@ -78,6 +87,7 @@ class CustomerServiceTest {
         assertThat(captureCustomer.getName()).isEqualTo(request.name());
         assertThat(captureCustomer.getEmail()).isEqualTo(request.email());
         assertThat(captureCustomer.getAge()).isEqualTo(request.age());
+        assertThat(captureCustomer.getPassword()).isEqualTo(passwordHash);
     }
 
     @Test
@@ -85,8 +95,8 @@ class CustomerServiceTest {
         String email = "alex@gmail.com";
         when(customerDao.existsPersonWithEmail(email)).thenReturn(true);
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                "alex",email, 22
-        );
+                "alex",email, "password", 22,
+                Gender.MALE);
         assertThatThrownBy( () -> underTest.addCustomer(request))
                 .isInstanceOf(DuplicateResourceException.class)
                 .hasMessage("The email is in use");

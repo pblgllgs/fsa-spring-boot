@@ -1,5 +1,11 @@
 package com.pblgllgs.customer;
 
-public record CustomerRegistrationRequest(String name, String email, Integer age) {
+public record CustomerRegistrationRequest(
+        String name,
+        String email,
+        String password,
+        Integer age,
+        Gender gender
+) {
 
 }

@@ -107,4 +107,16 @@ public class CustomerJDBCDataAccessService implements CustomerDao {
             System.out.println("update customer email result = " + result);
         }
     }
+
+    @Override
+    public Optional<Customer> selectUserByEmail(String email) {
+        var sql = """
+                SELECT id, name, email, password, age, gender
+                FROM customer
+                WHERE email = ?
+                """;
+        return jdbcTemplate.query(sql, customerRowMapper, email)
+                .stream()
+                .findFirst();
+    }
 }

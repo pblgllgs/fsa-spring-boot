@@ -36,8 +36,8 @@ public class CustomerIT {
         String email = fakerName.lastName() + UUID.randomUUID() + "@gmail.com";
         int age = RANDOM.nextInt(1, 100);
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                name,email,age
-        );
+                name,email, "password", age,
+                Gender.MALE);
 
         //Send a post request
         webTestClient.post()
@@ -100,8 +100,8 @@ public class CustomerIT {
         String email = fakerName.lastName() + UUID.randomUUID() + "@gmail.com";
         int age = RANDOM.nextInt(1, 100);
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                name,email,age
-        );
+                name,email, "password", age,
+                Gender.MALE);
 
         //Send a post request
         webTestClient.post()
@@ -161,8 +161,8 @@ public class CustomerIT {
         String email = fakerName.lastName() + UUID.randomUUID() + "@gmail.com";
         int age = RANDOM.nextInt(1, 100);
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                name,email,age
-        );
+                name,email, "password", age,
+                Gender.MALE);
 
         //Send a post request
         webTestClient.post()

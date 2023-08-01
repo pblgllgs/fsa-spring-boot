@@ -9,11 +9,11 @@ import {
   Input,
   Stack,
 } from "@chakra-ui/react";
-import { updateCustomer } from "../services/client.js";
+import { updateCustomer } from "../../services/client.js";
 import {
   errorNotification,
   successNotification,
-} from "../services/notification.js";
+} from "../../services/notification.js";
 
 // eslint-disable-next-line react/prop-types
 const MyTextInput = ({ label, ...props }) => {

@@ -2,8 +2,8 @@ import SidebarWithHeader from "./components/shared/sideBar";
 import { useEffect, useState } from "react";
 import { getCustomers } from "./services/client";
 import { Spinner, Text, Wrap, WrapItem } from "@chakra-ui/react";
-import CardwithImage from "./components/Card";
-import CreateCustomerDrawer from "./components/CreateCustomerDrawer.jsx";
+import CardwithImage from "./components/customer/CustomerCard.jsx";
+import CreateCustomerDrawer from "./components/customer/CreateCustomerDrawer.jsx";
 import { errorNotification } from "./services/notification.js";
 
 const App = () => {
@@ -15,7 +15,6 @@ const App = () => {
     setLoading(true);
     getCustomers()
       .then((response) => {
-        console.log(response.data);
         setCustomers(response.data);
       })
       .catch((err) => {

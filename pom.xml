@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.pblgllgs</groupId>
-	<artifactId>pblgllgs-api</artifactId>
+	<artifactId>backend-fsa</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<organization>
 		<name>pblgllgs</name>
